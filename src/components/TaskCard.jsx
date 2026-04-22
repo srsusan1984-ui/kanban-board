@@ -93,19 +93,29 @@ function TaskCard({
       </p>
 
       {/* Footer */}
-      <div
-        className="mt-5 flex items-center justify-between gap-3"
-        onClick={(e) =>
-          e.stopPropagation()
-        }
-      >
+      <div className="mt-5 flex items-center justify-between gap-3">
         <span
           className={`px-2.5 py-1 rounded-xl text-xs font-medium capitalize ${priorityColor[task.priority]}`}
         >
           {task.priority}
         </span>
 
-        <div className="space-x-3 text-sm">
+        {/* Action Buttons Safe Zone */}
+        <div
+          className="space-x-3 text-sm"
+          onPointerDown={(e) =>
+            e.stopPropagation()
+          }
+          onMouseDown={(e) =>
+            e.stopPropagation()
+          }
+          onTouchStart={(e) =>
+            e.stopPropagation()
+          }
+          onClick={(e) =>
+            e.stopPropagation()
+          }
+        >
           <button
             onClick={handleEdit}
             className="text-blue-400 hover:text-blue-300 transition"
