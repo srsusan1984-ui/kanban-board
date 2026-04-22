@@ -68,27 +68,24 @@ function TaskCard({
     <div
       ref={setNodeRef}
       style={style}
-      className={`rounded-2xl p-4 shadow-lg transition-all duration-200 hover:-translate-y-1 hover:shadow-2xl ${
+      {...listeners}
+      {...attributes}
+      className={`rounded-2xl p-4 shadow-lg transition-all duration-200 hover:-translate-y-1 hover:shadow-2xl cursor-grab active:cursor-grabbing select-none ${
         statusCard[task.status]
       } ${
         isDragging
-          ? "opacity-30 scale-100"
+          ? "opacity-40 scale-95 shadow-2xl ring-2 ring-violet-400"
           : ""
       }`}
     >
-      {/* Drag Handle */}
-      <div
-        {...listeners}
-        {...attributes}
-        className="flex justify-end cursor-grab active:cursor-grabbing mb-3"
-      >
-        <FiMove className="text-slate-500 hover:text-white transition" />
-      </div>
+      {/* Top */}
+      <div className="flex justify-between items-center mb-3">
+        <h3 className="font-semibold text-lg text-white tracking-tight">
+          {task.title}
+        </h3>
 
-      {/* Title */}
-      <h3 className="font-semibold text-lg text-white tracking-tight">
-        {task.title}
-      </h3>
+        <FiMove className="text-slate-500" />
+      </div>
 
       {/* Description */}
       <p className="text-sm text-slate-400 mt-2 leading-relaxed">
@@ -96,7 +93,12 @@ function TaskCard({
       </p>
 
       {/* Footer */}
-      <div className="mt-5 flex items-center justify-between gap-3">
+      <div
+        className="mt-5 flex items-center justify-between gap-3"
+        onClick={(e) =>
+          e.stopPropagation()
+        }
+      >
         <span
           className={`px-2.5 py-1 rounded-xl text-xs font-medium capitalize ${priorityColor[task.priority]}`}
         >
