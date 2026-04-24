@@ -64,6 +64,21 @@ function TaskCard({
       "bg-[#1a2238] border border-emerald-400/25 shadow-[0_0_24px_rgba(52,211,153,0.10)]",
   };
 
+  const statusLabel = {
+    todo: "PLANNING",
+    doing: "DEVELOPMENT",
+    done: "COMPLETED",
+  };
+
+  const statusTextColor = {
+    todo: "text-blue-400",
+    doing: "text-orange-400",
+    done: "text-green-400",
+  };
+
+  const isCompleted =
+    task.status === "done";
+
   return (
     <div
       ref={setNodeRef}
@@ -79,23 +94,47 @@ function TaskCard({
       }`}
     >
       {/* Top */}
-      <div className="flex justify-between items-center mb-3">
-        <h3 className="font-semibold text-lg text-white tracking-tight">
-          {task.title}
-        </h3>
+      <div className="flex justify-between items-start mb-4">
+        <div>
+          <p
+            className={`text-xs font-bold tracking-widest mb-3 ${
+              statusTextColor[task.status]
+            }`}
+          >
+            {statusLabel[task.status]}
+          </p>
 
-        <FiMove className="text-slate-500" />
+          <h3
+            className={`font-semibold text-lg tracking-tight ${
+              isCompleted
+                ? "text-slate-400 line-through"
+                : "text-white"
+            }`}
+          >
+            {task.title}
+          </h3>
+        </div>
+
+        <FiMove className="text-slate-500 mt-1" />
       </div>
 
       {/* Description */}
-      <p className="text-sm text-slate-400 mt-2 leading-relaxed">
+      <p
+        className={`text-sm mt-2 leading-relaxed ${
+          isCompleted
+            ? "text-slate-500 line-through"
+            : "text-slate-400"
+        }`}
+      >
         {task.description}
       </p>
 
       {/* Footer */}
       <div className="mt-5 flex items-center justify-between gap-3">
         <span
-          className={`px-2.5 py-1 rounded-xl text-xs font-medium capitalize ${priorityColor[task.priority]}`}
+          className={`px-2.5 py-1 rounded-xl text-xs font-medium capitalize ${
+            priorityColor[task.priority]
+          }`}
         >
           {task.priority}
         </span>
