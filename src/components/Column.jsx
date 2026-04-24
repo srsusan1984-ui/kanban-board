@@ -104,30 +104,32 @@ function Column({
         </div>
       )}
 
-      {/* Scrollable Cards Area */}
-      <div className="flex-1 min-h-0 overflow-y-auto overflow-x-hidden pr-1 space-y-4 relative z-10 scrollbar-thin scrollbar-thumb-slate-600 scrollbar-track-transparent hover:scrollbar-thumb-slate-500">
-        {filteredTasks.length > 0 ? (
-          filteredTasks.map((task) => (
-            <TaskCard
-              key={task.id}
-              task={task}
-              setIsModalOpen={setIsModalOpen}
-              setEditingTask={setEditingTask}
-            />
-          ))
-        ) : (
-          <div
-            className={`h-full min-h-[320px] flex items-center justify-center rounded-2xl border-2 border-dashed text-sm font-medium transition-all duration-300 ${
-              isOver
-                ? "border-violet-300 text-white bg-violet-500/15"
-                : "border-white/10 text-slate-500"
-            }`}
-          >
-            {isOver
-              ? `Release to move to ${title}`
-              : "Drop tasks here"}
-          </div>
-        )}
+      {/* Cards Area Wrapper */}
+      <div className="flex-1 min-h-0 relative z-10 overflow-hidden">
+        <div className="h-full overflow-y-auto overflow-x-hidden pr-1 space-y-4 scroll-smooth no-scrollbar">
+          {filteredTasks.length > 0 ? (
+            filteredTasks.map((task) => (
+              <TaskCard
+                key={task.id}
+                task={task}
+                setIsModalOpen={setIsModalOpen}
+                setEditingTask={setEditingTask}
+              />
+            ))
+          ) : (
+            <div
+              className={`h-full min-h-[320px] flex items-center justify-center rounded-2xl border-2 border-dashed text-sm font-medium transition-all duration-300 ${
+                isOver
+                  ? "border-violet-300 text-white bg-violet-500/15"
+                  : "border-white/10 text-slate-500"
+              }`}
+            >
+              {isOver
+                ? `Release to move to ${title}`
+                : "Drop tasks here"}
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );
